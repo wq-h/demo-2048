@@ -1,0 +1,77 @@
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+            http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+
+
+    <servlet>
+        <servlet-name>MoveTilesServlet</servlet-name>
+        <servlet-class>com.twenty48.Servlets.MoveTilesServlet</servlet-class>
+        <init-param>
+            <param-name>technology</param-name>
+            <param-value>servlets</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet>
+        <servlet-name>NewGameServlet</servlet-name>
+        <servlet-class>com.twenty48.Servlets.NewGameServlet</servlet-class>
+        <init-param>
+            <param-name>technology</param-name>
+            <param-value>servlets</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet>
+        <servlet-name>GetTilesServlet</servlet-name>
+        <servlet-class>com.twenty48.Servlets.GetTilesServlet</servlet-class>
+        <init-param>
+            <param-name>technology</param-name>
+            <param-value>servlets</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet>
+        <servlet-name>ScoreServlet</servlet-name>
+        <servlet-class>com.twenty48.Servlets.GetScoreServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>GetStateServlet</servlet-name>
+        <servlet-class>com.twenty48.Servlets.GetStateServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MoveTilesServlet</servlet-name>
+        <url-pattern>/servlet/MoveTiles</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>NewGameServlet</servlet-name>
+        <url-pattern>/servlet/NewGame</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>GetTilesServlet</servlet-name>
+        <url-pattern>/servlet/GetTiles</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ScoreServlet</servlet-name>
+        <url-pattern>/servlet/GetScore</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>GetStateServlet</servlet-name>
+        <url-pattern>/servlet/GetState</url-pattern>
+    </servlet-mapping>
+
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+
+</web-app>
+

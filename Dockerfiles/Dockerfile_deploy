@@ -1,0 +1,3 @@
+FROM <harbor ip>/tenx_containers/tomcat:9
+RUN rm -rf /usr/local/tomcat/webapps/ROOT/
+ADD 2048 /usr/local/tomcat/webapps/ROOT/

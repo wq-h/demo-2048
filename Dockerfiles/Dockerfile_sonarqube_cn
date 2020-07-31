@@ -1,0 +1,2 @@
+FROM index.tenxcloud.com/tenxcloud/sonarqube:5.6.6-alpine
+COPY sonar-l10n-zh-plugin-1.11-RC2-SNAPSHOT.jar /opt/sonarqube/extensions/plugins/
