@@ -24,19 +24,16 @@ volumes:
 # 第一阶段：构建代码
 steps:
   - name: build code
-    image: registry.cn-hangzhou.aliyuncs.com/hwq-infra/maven:3.6.3
+    image: maven:3.6-jdk-8
     # 在容器里执行的shell命令列表  
     commands:
     - mvn clean install -DskipTests=true
-    - jar -xf target/demo-2048.war
+    - cd target && jar -xf 2048.war
+    - ls -l
     # 在容器里挂载目录
     volumes:
       - name: cache
         path: /root/.m2
-    # 当drone分支有push动作时,运行此步骤的条件       
-    when:
-      event: [push]
-      branch: drone
 
 # 第二阶段: 构建镜像&推送镜像
   - name: build image & push
@@ -79,3 +76,8 @@ steps:
     when:
       status: success
       event: [push]
+      
+# 通过分支限制pipeline执行
+trigger:
+  branch:
+  - drone      
