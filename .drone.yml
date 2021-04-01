@@ -54,7 +54,6 @@ steps:
       insecure: true
       # 构建镜像的dockerfile文件
       dockerfile: ./Dockerfiles/Dockerfile
-    # 运行此步骤的条件  
 
 # 第三阶段: 服务滚动更新
   - name: k8s-deploy
