@@ -1,2 +1,3 @@
-FROM registry.cn-hangzhou.aliyuncs.com/hwq-infra/tomcat:8.5.63
-COPY target/*.war /usr/local/tomcat/webapps/
+FROM tomcat:8.5.64-jdk8
+RUN rm -rf /usr/local/tomcat/webapps/ROOT/
+ADD target/2048 /usr/local/tomcat/webapps/ROOT/
