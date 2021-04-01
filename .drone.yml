@@ -40,9 +40,9 @@ steps:
     image: plugins/docker     # docker插件
     settings:
       # 镜像仓库组名称
-      repo: harbor.od.com/demo/demo-2048
+      repo: 10.166.33.110/demo/demo-2048
       # 镜像仓库名称
-      registry: harbor.od.com
+      registry: 10.166.33.110
       # 在web界面中设置的密钥        
       username:
         from_secret: harbor_username    
@@ -55,6 +55,7 @@ steps:
       insecure: true
       # 构建镜像的dockerfile文件
       dockerfile: ./Dockerfiles/Dockerfile
+    # 运行此步骤的条件  
 
 # 第三阶段: 服务滚动更新
   - name: k8s-deploy
@@ -65,19 +66,42 @@ steps:
       # yaml模板
       template: template/demo-2048.yaml
       # apiserver地址    
-      server: https://apiserver:6443
-      # Kubernetes服务帐户令牌
+      server: https://10.166.33.111:6443
+      # Kubernetes服务帐户令牌 'kubectl get secret -nkube-system|grep token'
       token:
         from_secret: k8s_token
       # K8s CA证书的Base-64编码的字符串
       ca:
         from_secret: k8s_ca    
-    # 当流水线成功的时候执行
+
+# 第四阶段: 邮件通知
+  - name: email
+    # 邮件插件
+    image: drillster/drone-email:latest
+    settings:
+      # 只发送给邮件收件人
+      recipients_only: true
+      # 邮件收件列表
+      recipients: [weiqun_h@163.com]
+      # 设置主题
+      subject: "Drone build: [{{ build.status }}] {{ repo.name }} ({{ repo.branch }}) #{{ build.number }}"
+      # 邮件服务器主机
+      host: smtp.exmail.qq.com
+      # 邮件服务器端口
+      port: 465
+      # 从该地址发送通知
+      from: weiqun.he@tenxcloud.com
+      # 用户名
+      username:
+        from_secret: email_user
+      # 密码
+      password:
+        from_secret: email_password
+    # 当流水线执行成功或失败是发送    
     when:
-      status: success
-      event: [push]
-      
+      status: [ success, failure ]
+
 # 通过分支限制pipeline执行
 trigger:
   branch:
-  - drone      
+  - drone
