@@ -35,17 +35,3 @@ spec:
       restartPolicy: Always
       imagePullSecrets:
         - name: harbor
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: damo-2048
-  namespace: demo
-spec:
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 8080
-  selector:
-    app: demo-2048
-    name: demo-2048
