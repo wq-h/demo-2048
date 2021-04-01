@@ -20,7 +20,6 @@ volumes:
   host:
     path: /data/cache
 
-
 # 第一阶段：构建代码
 steps:
   - name: build code
