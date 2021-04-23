@@ -1,0 +1,37 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: ${APP_NAME}
+  namespace: ${APP_NS}
+  labels:
+    app: ${APP_NAME}
+    name: ${APP_NAME}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ${APP_NAME}
+      name: ${APP_NAME}
+  template:
+    metadata:
+      labels:
+        app: ${APP_NAME}
+        name: ${APP_NAME}
+    spec:
+      containers:
+        - name: ${APP_NAME}
+          image: ${IMAGE}
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 128m
+              memory: 256Mi
+            requests:
+              cpu: 128m
+              memory: 128Mi
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      imagePullSecrets:
+        - name: harbor
