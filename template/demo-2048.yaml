@@ -35,3 +35,17 @@ spec:
       restartPolicy: Always
       imagePullSecrets:
         - name: harbor
+---
+kind: Service
+apiVersion: v1
+metadata: 
+  name: ${APP_NAME}
+  namespace: ${APP_NS}
+spec:
+  ports:
+  - name: web
+    port: 8080
+    targetPort: 8080
+  selector:
+    app: ${APP_NAME}
+    name: ${APP_NAME}
